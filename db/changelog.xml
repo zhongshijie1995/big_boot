@@ -7,6 +7,5 @@
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd
         http://www.liquibase.org/xml/ns/pro
         http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.5.xsd">
-    <changeSet id="标准化项目投产">
-    </changeSet>
+    <includeAll path="20220619" />
 </databaseChangeLog>
