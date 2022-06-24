@@ -5,5 +5,4 @@ create table zsj (
     zsj_id varchar(2),
     zsj_name varchar(30)
 );
--- rollback drop table zsj
-
+-- rollback drop table zsj;
