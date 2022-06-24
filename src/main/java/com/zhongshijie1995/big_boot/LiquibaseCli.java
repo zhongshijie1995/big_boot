@@ -25,30 +25,35 @@ public class LiquibaseCli {
     // 辅助内容
     public static final String I = "CLI";
     public static final String GBK = "GBK";
-    public static Scanner sc = new Scanner(System.in);
 
+    // 日志控制器
     private static final Logger logger = LoggerFactory.getLogger(LiquibaseCli.class);
 
+    // 键入控制器
+    public static Scanner sc = new Scanner(System.in);
+
     public static void main(String[] args) {
-         runCmd(BASE_PATH, getCmd(getParams()));
+        // 获取参数，运行命令
+        runCmd(BASE_PATH, getCmd(getParams()));
     }
 
     public static List<String> getParams() {
         List<String> params = new ArrayList<>();
         ChoiceQuestion mainType = new ChoiceQuestion("选择操作类型");
         mainType.giveItem("更新与回滚", "change");
+        mainType.giveItem("基线标记", "tag");
         mainType.giveItem("差异比较", "diff");
         mainType.giveItem("生成变更文档", "db-doc");
         String mainTypeAnswer = mainType.ask();
 
         if (mainTypeAnswer.equals("change")) {
             ChoiceQuestion subType = new ChoiceQuestion(String.format("选择支持的类型", mainTypeAnswer));
-            subType.giveItem("更新至最新", "update");
-            subType.giveItem("回滚至日期（YYYY-MM-DD HH:MM:SS）", "rollback-to-date");
-            subType.giveItem("更新（变更数）", "update-count");
-            subType.giveItem("回滚（变更数）", "rollback-count");
-            subType.giveItem("更新（Tag）", "update-to-tag");
-            subType.giveItem("回滚（Tag）", "rollback");
+            subType.giveItem("更新至（现在）", "update");
+            subType.giveItem("回滚至（日期 YYYY-MM-DD HH:MM:SS）", "rollback-to-date");
+            subType.giveItem("更新至（变更数）", "update-count");
+            subType.giveItem("回滚至（变更数）", "rollback-count");
+            subType.giveItem("更新至（基线名）", "update-to-tag");
+            subType.giveItem("回滚至（基线名）", "rollback");
             String subTypeAnswer = subType.ask();
             params.add(subTypeAnswer);
             if (!subTypeAnswer.equals("update")) {
@@ -56,6 +61,13 @@ public class LiquibaseCli {
                 String subInputAnswer = subInput.ask();
                 params.add(subInputAnswer);
             }
+        }
+
+        if (mainTypeAnswer.equals("tag")) {
+            params.add(mainTypeAnswer);
+            InputQuestion subInput = new InputQuestion("提供基线名");
+            String subInputAnswer = subInput.ask();
+            params.add(subInputAnswer);
         }
 
         if (mainTypeAnswer.equals("diff") || mainTypeAnswer.equals("db-doc")) {
@@ -77,7 +89,7 @@ public class LiquibaseCli {
         }
 
         public String ask() {
-            logger.info("[{}] 进入操作 {}", I, title);
+            logger.debug("[{}] 进入操作 {}", I, title);
             Integer choose = -1;
             do {
                 if (choose == -1) {
@@ -94,7 +106,7 @@ public class LiquibaseCli {
                 choose = Integer.valueOf(sc.nextLine());
             } while (!answers.containsKey(choose));
             System.out.println("------------------------------------");
-            logger.info("[{}] 已选择 {} {}", I,choose, answers.get(choose));
+            logger.debug("[{}] 已选择 {} {}", I,choose, answers.get(choose));
             return answers.get(choose);
         }
 
@@ -113,13 +125,13 @@ public class LiquibaseCli {
         }
 
         public String ask() {
-            logger.info("[{}] 进入操作 {}", I, title);
+            logger.debug("[{}] 进入操作 {}", I, title);
             System.out.println("------------------------------------");
             System.out.println(title);
             System.out.print("请输入 > ");
             String input = sc.nextLine();
             System.out.println("------------------------------------");
-            logger.info("[{}] 已输入 {}", I, input);
+            logger.debug("[{}] 已输入 {}", I, input);
             return input;
         }
     }
