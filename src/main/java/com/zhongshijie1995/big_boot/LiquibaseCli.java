@@ -89,7 +89,6 @@ public class LiquibaseCli {
         }
 
         public String ask() {
-            logger.debug("[{}] 进入操作 {}", I, title);
             Integer choose = -1;
             do {
                 if (choose == -1) {
@@ -105,8 +104,6 @@ public class LiquibaseCli {
                 }
                 choose = Integer.valueOf(sc.nextLine());
             } while (!answers.containsKey(choose));
-            System.out.println("------------------------------------");
-            logger.debug("[{}] 已选择 {} {}", I,choose, answers.get(choose));
             return answers.get(choose);
         }
 
@@ -125,13 +122,10 @@ public class LiquibaseCli {
         }
 
         public String ask() {
-            logger.debug("[{}] 进入操作 {}", I, title);
             System.out.println("------------------------------------");
             System.out.println(title);
             System.out.print("请输入 > ");
             String input = sc.nextLine();
-            System.out.println("------------------------------------");
-            logger.debug("[{}] 已输入 {}", I, input);
             return input;
         }
     }
