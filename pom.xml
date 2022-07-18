@@ -19,6 +19,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>big_boot</name>
     <description>big_boot</description>
+    <packaging>war</packaging>
 
     <!-- 项目属性 -->
     <properties>
