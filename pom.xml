@@ -1,27 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <!-- POM模型版本 -->
     <modelVersion>4.0.0</modelVersion>
+
+    <!-- 依赖基础 -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.7.0</version>
         <relativePath/>
     </parent>
+
+    <!-- 项目信息 -->
     <groupId>com.zhongshijie1995</groupId>
     <artifactId>big_boot</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>big_boot</name>
     <description>big_boot</description>
+
+    <!-- 项目属性 -->
     <properties>
         <java.version>11</java.version>
     </properties>
+
+    <!-- 依赖配置 -->
     <dependencies>
+        <!-- 启动器-Web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
+        <!-- 启动器-Junit -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -29,6 +40,7 @@
         </dependency>
     </dependencies>
 
+    <!-- 构建配置 -->
     <build>
         <plugins>
             <plugin>

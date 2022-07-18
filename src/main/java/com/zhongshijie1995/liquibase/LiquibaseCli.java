@@ -1,187 +1,82 @@
 package com.zhongshijie1995.liquibase;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.zhongshijie1995.liquibase.term.TermChoice;
+import com.zhongshijie1995.liquibase.term.TermController;
+import com.zhongshijie1995.liquibase.term.TermInput;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class LiquibaseCli {
 
-    // 操作系统环境
-    public static final String WIN = "win";
-    public static final String UNIX = "unix";
-    public static final String WIN_CLI = "powershell.exe";
-    public static final String UNIX_CLI = "/bin/sh";
-
     // Liquibase目录
     public static final String BASE_PATH = "db";
-    public static final String LIQUIBASE = "com/zhongshijie1995/liquibase/liquibase";
-    public static final String SPACE = " ";
-
-    // 辅助内容
-    public static final String I = "CLI";
-    public static final String GBK = "GBK";
-
-    // 日志控制器
-    private static final Logger logger = LoggerFactory.getLogger(LiquibaseCli.class);
+    public static final String LIQUIBASE = "liquibase/liquibase";
 
     // 键入控制器
     public static Scanner sc = new Scanner(System.in);
 
+    /**
+     * 入口函数
+     *
+     * @param args 任意入口参数
+     */
     public static void main(String[] args) {
-        // 获取参数，运行命令
-        runCmd(BASE_PATH, getCmd(getParams()));
+        TermController termController = new TermController(); // 初始化终端交互器
+        String cmd = termController.appendCmd(LIQUIBASE, getParams());// 获取参数
+        termController.runCmd(BASE_PATH, cmd); // 运行命令
     }
 
+    /**
+     * 获取参数
+     *
+     * @return 参数列表
+     */
     public static List<String> getParams() {
+        // 准备参数列表
         List<String> params = new ArrayList<>();
-        ChoiceQuestion mainType = new ChoiceQuestion("选择操作类型");
-        mainType.giveItem("更新与回滚", "change");
-        mainType.giveItem("基线标记", "tag");
-        mainType.giveItem("差异比较", "diff");
-        mainType.giveItem("生成变更文档", "db-doc");
-        String mainTypeAnswer = mainType.ask();
 
-        if (mainTypeAnswer.equals("change")) {
-            ChoiceQuestion subType = new ChoiceQuestion("选择支持的类型");
-            subType.giveItem("更新至（现在）", "update");
-            subType.giveItem("回滚至（日期 YYYY-MM-DD HH:MM:SS）", "rollback-to-date");
-            subType.giveItem("更新至（变更数）", "update-count");
-            subType.giveItem("回滚至（变更数）", "rollback-count");
-            subType.giveItem("更新至（基线名）", "update-to-tag");
-            subType.giveItem("回滚至（基线名）", "rollback");
-            String subTypeAnswer = subType.ask();
-            params.add(subTypeAnswer);
-            if (!subTypeAnswer.equals("update")) {
-                InputQuestion subInput = new InputQuestion("提供操作值");
+        // 问题A
+        TermChoice questionA = new TermChoice("A.选择操作类型", sc);
+        questionA.addItem("更新与回滚", "change");
+        questionA.addItem("打标记", "tag");
+        questionA.addItem("比较", "diff");
+        questionA.addItem("生成变更文档", "db-doc");
+        String answerA = questionA.ask();
+
+        // 问题A的分支
+        switch (answerA) {
+            case "change":
+                // 问题AA
+                TermChoice questionAA = new TermChoice("选择支持的类型", sc);
+                questionAA.addItem("更新至（现在）", "update");
+                questionAA.addItem("回滚至（日期 YYYY-MM-DD HH:MM:SS）", "rollback-to-date");
+                questionAA.addItem("更新至（变更数）", "update-count");
+                questionAA.addItem("回滚至（变更数）", "rollback-count");
+                questionAA.addItem("更新至（基线名）", "update-to-tag");
+                questionAA.addItem("回滚至（基线名）", "rollback");
+                String answerAA = questionAA.ask();
+                params.add(answerAA);
+                switch (answerAA) {
+                    case "update":
+                        break;
+                    default:
+                        // 问题AAA
+                        TermInput questionAAA = new TermInput("提供操作值", sc);
+                        String answerAAA = questionAAA.ask();
+                        params.add(answerAAA);
+                }
+            case "tag":
+                params.add(answerA);
+                TermInput subInput = new TermInput("提供基线名", sc);
                 String subInputAnswer = subInput.ask();
                 params.add(subInputAnswer);
-            }
+                break;
+            default:
+                params.add(answerA);
         }
-
-        if (mainTypeAnswer.equals("tag")) {
-            params.add(mainTypeAnswer);
-            InputQuestion subInput = new InputQuestion("提供基线名");
-            String subInputAnswer = subInput.ask();
-            params.add(subInputAnswer);
-        }
-
-        if (mainTypeAnswer.equals("diff") || mainTypeAnswer.equals("db-doc")) {
-            params.add(mainTypeAnswer);
-        }
-
         return params;
     }
 
-    static class ChoiceQuestion {
-        private final String title;
-        private final Map<Integer, String> items;
-        private final Map<Integer, String> answers;
-
-        public ChoiceQuestion(String title) {
-            this.title = title;
-            this.items = new HashMap<>();
-            this.answers = new HashMap<>();
-        }
-
-        public String ask() {
-            int choose = -1;
-            do {
-                if (choose == -1) {
-                    System.out.println("------------------------------------");
-                    System.out.println(title);
-                    for (Map.Entry<Integer, String> item: items.entrySet()) {
-                        String show = String.format("[%d] %s", item.getKey(), item.getValue());
-                        System.out.println(show);
-                    }
-                    System.out.print("请选择 > ");
-                } else {
-                    System.out.print("输入有误，请选择 > ");
-                }
-                choose = Integer.parseInt(sc.nextLine());
-            } while (!answers.containsKey(choose));
-            return answers.get(choose);
-        }
-
-        public void giveItem(String choice, String answer) {
-            int id = items.size() + 1;
-            items.put(id, choice);
-            answers.put(id, answer);
-        }
-    }
-
-    static class InputQuestion {
-        private final String title;
-
-        public InputQuestion(String title) {
-            this.title = title;
-        }
-
-        public String ask() {
-            System.out.println("------------------------------------");
-            System.out.println(title);
-            System.out.print("请输入 > ");
-            return sc.nextLine();
-        }
-    }
-
-    public static String getCmd(List<String> params) {
-        StringBuilder cmd = new StringBuilder();
-        cmd.append(getOSPath(LIQUIBASE));
-        for (String param: params) {
-            cmd.append(SPACE);
-            cmd.append(param);
-        }
-        return cmd.toString();
-    }
-
-    public static String getOs() {
-        String osName = System.getProperty("os.name").toLowerCase();
-        if (osName.startsWith(WIN)) {
-            return WIN;
-        }
-        return UNIX;
-    }
-
-    public static String getOsCli() {
-        return getOs().equals(WIN) ? WIN_CLI: UNIX_CLI;
-    }
-
-    public static String getOsEncoding() {
-        return getOs().equals(WIN) ? GBK: StandardCharsets.UTF_8.toString();
-    }
-
-    public static String getOSPath(String in) {
-        return getOs().equals(WIN) ? in.replace("/", "\\"): in;
-    }
-
-    public static void runCmd(String path, String cmd) {
-        logger.info("[{}] 执行命令 {}", I, cmd);
-        try {
-            ProcessBuilder processBuilder = new ProcessBuilder();
-            processBuilder
-                    .directory(new File(path).getAbsoluteFile())
-                    .command(getOsCli(), "-c", cmd)
-                    .redirectErrorStream(true);
-            Process process = processBuilder.start();
-            BufferedReader br = new BufferedReader(new InputStreamReader(process.getInputStream(), getOsEncoding()));
-            String line;
-            boolean needShowLog = false;
-            while ((line = br.readLine()) != null) {
-                if (needShowLog) {
-                    logger.info(line);
-                }
-                if (line.contains("Liquibase Community 4.12.0 by Liquibase")) {
-                    needShowLog = true;
-                }
-            }
-            process.waitFor();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }
