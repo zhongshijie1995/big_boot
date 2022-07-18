@@ -1,4 +1,4 @@
-package com.zhongshijie1995.big_boot;
+package com.zhongshijie1995.liquibase;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +19,7 @@ public class LiquibaseCli {
 
     // Liquibase目录
     public static final String BASE_PATH = "db";
-    public static final String LIQUIBASE = "./liquibase/liquibase";
+    public static final String LIQUIBASE = "com/zhongshijie1995/liquibase/liquibase";
     public static final String SPACE = " ";
 
     // 辅助内容
@@ -47,7 +47,7 @@ public class LiquibaseCli {
         String mainTypeAnswer = mainType.ask();
 
         if (mainTypeAnswer.equals("change")) {
-            ChoiceQuestion subType = new ChoiceQuestion(String.format("选择支持的类型", mainTypeAnswer));
+            ChoiceQuestion subType = new ChoiceQuestion("选择支持的类型");
             subType.giveItem("更新至（现在）", "update");
             subType.giveItem("回滚至（日期 YYYY-MM-DD HH:MM:SS）", "rollback-to-date");
             subType.giveItem("更新至（变更数）", "update-count");
@@ -78,9 +78,9 @@ public class LiquibaseCli {
     }
 
     static class ChoiceQuestion {
-        private String title;
-        private Map<Integer, String> items;
-        private Map<Integer, String> answers;
+        private final String title;
+        private final Map<Integer, String> items;
+        private final Map<Integer, String> answers;
 
         public ChoiceQuestion(String title) {
             this.title = title;
@@ -89,7 +89,7 @@ public class LiquibaseCli {
         }
 
         public String ask() {
-            Integer choose = -1;
+            int choose = -1;
             do {
                 if (choose == -1) {
                     System.out.println("------------------------------------");
@@ -102,7 +102,7 @@ public class LiquibaseCli {
                 } else {
                     System.out.print("输入有误，请选择 > ");
                 }
-                choose = Integer.valueOf(sc.nextLine());
+                choose = Integer.parseInt(sc.nextLine());
             } while (!answers.containsKey(choose));
             return answers.get(choose);
         }
@@ -115,7 +115,7 @@ public class LiquibaseCli {
     }
 
     static class InputQuestion {
-        private String title;
+        private final String title;
 
         public InputQuestion(String title) {
             this.title = title;
@@ -125,8 +125,7 @@ public class LiquibaseCli {
             System.out.println("------------------------------------");
             System.out.println(title);
             System.out.print("请输入 > ");
-            String input = sc.nextLine();
-            return input;
+            return sc.nextLine();
         }
     }
 
