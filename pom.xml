@@ -16,34 +16,46 @@
     <!-- 项目信息 -->
     <groupId>com.zhongshijie1995</groupId>
     <artifactId>big_boot</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>big_boot</name>
     <description>big_boot</description>
     <packaging>war</packaging>
 
     <!-- 项目属性 -->
     <properties>
+        <!-- 指定Java版本 -->
         <java.version>11</java.version>
+        <!-- 指定构建资源文件编码 -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- 记录Maven构建信息 -->
+        <timestamp>${maven.build.timestamp}</timestamp>
+        <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
     </properties>
 
     <!-- 依赖配置 -->
     <dependencies>
-        <!-- 启动器-Web -->
+
+        <!-- ⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇ Tomcat适配 ⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇ -->
+        <!-- 指定tomcat由容器提供 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-tomcat</artifactId>
-                </exclusion>
-            </exclusions>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
         </dependency>
+        <!-- 指定servlet-api由容器提供 -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <scope>provided</scope>
         </dependency>
+        <!-- ⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆ Tomcat适配 ⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆ -->
+
+        <!-- 启动器-Web -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
         <!-- 启动器-Junit -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -55,12 +67,22 @@
     <!-- 构建配置 -->
     <build>
         <finalName>big_boot</finalName>
+        <!-- 插件配置 -->
         <plugins>
+            <!-- SpringbootMaven构建插件 -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
+        <!-- 资源配置 -->
+        <resources>
+            <!-- 对资源目录的占位符进行替换 -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
     </build>
 
 </project>
