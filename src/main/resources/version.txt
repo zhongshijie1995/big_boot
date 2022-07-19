@@ -1,1 +1,1 @@
-AppVersion: @project.version@ & BuildTime: @timestamp@ (UTC)
+程序版本:[@project.version@] & 构建时间：UTC[@timestamp@]
