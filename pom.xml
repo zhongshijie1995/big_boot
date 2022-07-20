@@ -73,10 +73,17 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- 实体类成员代码自动生成器 -->
+        <!-- Lombok实体类代码自动生成器 -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+        </dependency>
+
+        <!-- Swagger3接口文档 -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-boot-starter</artifactId>
+            <version>3.0.0</version>
         </dependency>
     </dependencies>
 

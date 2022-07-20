@@ -29,27 +29,8 @@ Springboot大操场，集成一些基于Springboot的实验
 
 ## Springboot服务
 
-### Restful
+### Restful服务
 
-<table>
-  <tr>
-    <th>模块</th>
-    <th>请求URL</th>
-    <th>请求结果</th>
-  </tr>
-  <tr>
-    <td rowspan="3">info</td>
-    <td>info/version</td>
-    <td>版本号</td>
-  </tr>
-  <tr>
-    <td>info/time</td>
-    <td>构建时间</td>
-  </tr>
-  <tr>
-    <td>info/all</td>
-    <td>版本信息汇总</td>
-  </tr>
-</table>
+#### 接口文档 `/swagger-ui`
 
 ## GithubAction持续集成
