@@ -3,7 +3,6 @@
 Springboot大操场，集成一些基于Springboot的实验
 
 ## 数据库版本管理
-
 实现功能：
 - [x] 数据库（表结构+数据）更新和回滚
     - [x] 按变更集
@@ -19,14 +18,38 @@ Springboot大操场，集成一些基于Springboot的实验
 3. 运行`src/main/java/com/zhongshijie1995/liquibase/LiquibaseCli.java`根据提示进行操作。
 
 ### 涉及文件及说明
-- db
-    - liquibase 数据库版本管理工具
-    - changelog.xml 数据库变更日志登记文件
-    - liquibase.properties 数据库环境信息
-    - yyyyMMdd-ProjectName 数据库变更窗口脚本文件
-- src/java/main/com/zhongshijie1995/liquibase
-    - LiquibaseCli.java 数据库变更实施工具
 
-## Restful服务
+- db
+  - liquibase 数据库版本管理工具
+  - changelog.xml 数据库变更日志登记文件
+  - liquibase.properties 数据库环境信息
+  - yyyyMMdd-ProjectName 数据库变更窗口脚本文件
+- src/java/main/com/zhongshijie1995/liquibase
+  - LiquibaseCli.java 数据库变更实施工具
+
+## Springboot服务
+
+### Restful
+
+<table>
+  <tr>
+    <th>模块</th>
+    <th>请求URL</th>
+    <th>请求结果</th>
+  </tr>
+  <tr>
+    <td rowspan="3">info</td>
+    <td>info/version</td>
+    <td>版本号</td>
+  </tr>
+  <tr>
+    <td>info/time</td>
+    <td>构建时间</td>
+  </tr>
+  <tr>
+    <td>info/all</td>
+    <td>版本信息汇总</td>
+  </tr>
+</table>
 
 ## GithubAction持续集成

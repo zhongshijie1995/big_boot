@@ -1,1 +1,0 @@
-程序版本[ @project.version@ ]  &  构建时间[ @timestamp@ ] UTC

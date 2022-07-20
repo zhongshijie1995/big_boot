@@ -53,17 +53,30 @@
         </dependency>
         <!-- ⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆ Tomcat适配 ⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆ -->
 
-        <!-- 启动器-Web -->
+        <!-- SpringbootWeb服务启动器 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- 启动器-Junit -->
+        <!-- Springboot测试启动器 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <!-- Springboot配置注解处理器 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- 实体类成员代码自动生成器 -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
         </dependency>
     </dependencies>
 
