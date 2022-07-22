@@ -37,6 +37,11 @@
 
     <!-- 依赖配置 -->
     <dependencies>
+        <!-- SpringbootWeb服务启动器 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
 
         <!-- ⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇ Tomcat适配 ⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇ -->
         <!-- 指定tomcat由容器提供 -->
@@ -52,12 +57,6 @@
             <scope>provided</scope>
         </dependency>
         <!-- ⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆ Tomcat适配 ⬆⬆⬆⬆⬆⬆⬆⬆⬆⬆ -->
-
-        <!-- SpringbootWeb服务启动器 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
 
         <!-- Springboot测试启动器 -->
         <dependency>
@@ -84,6 +83,19 @@
             <groupId>io.springfox</groupId>
             <artifactId>springfox-boot-starter</artifactId>
             <version>3.0.0</version>
+        </dependency>
+
+        <!-- MyBatisPlus数据持久层框架 -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus</artifactId>
+            <version>3.5.2</version>
+        </dependency>
+
+        <!-- MySQL数据库连接驱动 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
         </dependency>
     </dependencies>
 

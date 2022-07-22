@@ -1,4 +1,10 @@
 spring:
+  profiles:
+    active: test
   mvc:
     pathmatch:
-      matching-strategy: ant_path_matcher
+      matching-strategy: ant_path_matcher  # 解决Springboot与Swagger路径匹配策略冲突
+
+mybatis-plus:
+  configuration:
+    call-setters-on-nulls: true  # 指定resultType的类型为java.util.map发现字段为null时其Key仍保留

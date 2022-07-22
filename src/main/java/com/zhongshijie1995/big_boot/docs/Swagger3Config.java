@@ -1,4 +1,4 @@
-package com.zhongshijie1995.big_boot.swagger;
+package com.zhongshijie1995.big_boot.docs;
 
 import com.zhongshijie1995.big_boot.info.InfoProperties;
 import io.swagger.annotations.ApiOperation;
