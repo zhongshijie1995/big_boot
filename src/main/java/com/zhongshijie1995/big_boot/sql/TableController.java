@@ -1,7 +1,8 @@
 package com.zhongshijie1995.big_boot.sql;
 
-import com.zhongshijie1995.big_boot.sql.mapper.TableMapper;
+import com.zhongshijie1995.big_boot.sql.mapper.TabMapper;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,12 +15,12 @@ import java.util.List;
 @RestController
 @RequestMapping("sql")
 public class TableController {
-
     @Resource
-    private TableMapper tableMapper;
+    private TabMapper tabMapper;
 
-    @GetMapping("getTableDetails")
-    public List<HashMap<String, Object>> getTableDetails() {
-        return tableMapper.queryTableDetails("ops_tips", "1=1");
+    @ApiOperation("查询数据表")
+    @GetMapping("getTab")
+    public List<HashMap<String, Object>> getTab(String tab, String condition) {
+        return tabMapper.query(tab, condition);
     }
 }
