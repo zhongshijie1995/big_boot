@@ -37,15 +37,12 @@ public class LiquibaseCli {
         // 准备参数列表
         List<String> params = new ArrayList<>();
 
-        // 问题A
         TermChoice questionA = new TermChoice("A.选择操作类型", sc);
         questionA.addItem("更新与回滚", "change");
         questionA.addItem("打标记", "tag");
         questionA.addItem("比较", "diff");
         questionA.addItem("生成变更文档", "db-doc");
         String answerA = questionA.ask();
-
-        // 问题A的分支
         switch (answerA) {
             case "change":
                 // 问题AA
@@ -58,15 +55,12 @@ public class LiquibaseCli {
                 questionAA.addItem("回滚至（基线名）", "rollback");
                 String answerAA = questionAA.ask();
                 params.add(answerAA);
-                switch (answerAA) {
-                    case "update":
-                        break;
-                    default:
-                        // 问题AAA
-                        TermInput questionAAA = new TermInput("提供操作值", sc);
-                        String answerAAA = questionAAA.ask();
-                        params.add(answerAAA);
+                if (!"update".equals(answerAA)) {
+                    TermInput questionAAA = new TermInput("提供操作值", sc);
+                    String answerAAA = questionAAA.ask();
+                    params.add(answerAAA);
                 }
+                break;
             case "tag":
                 params.add(answerA);
                 TermInput subInput = new TermInput("提供基线名", sc);
