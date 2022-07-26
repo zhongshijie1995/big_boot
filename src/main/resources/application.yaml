@@ -11,4 +11,4 @@ mybatis-plus:
 
 logging:
   level:
-    com.zhongshijie1995.big_boot: DEBUG # 指定
+    com.zhongshijie1995.big_boot: INFO # 指定本项目内代码的日志级别

@@ -1,4 +1,4 @@
-package com.zhongshijie1995.big_boot.sql.util;
+package com.zhongshijie1995.big_boot.sql.bean;
 
 import java.util.ArrayList;
 import java.util.HashMap;
