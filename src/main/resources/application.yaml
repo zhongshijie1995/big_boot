@@ -6,9 +6,14 @@ spring:
       matching-strategy: ant_path_matcher  # 解决Springboot与Swagger路径匹配策略冲突
 
 mybatis-plus:
+  global-config:
+    banner: off  # 指定mybatis-plus的封面不显示
   configuration:
     call-setters-on-nulls: true  # 指定resultType的类型为java.util.map发现字段为null时其Key仍保留
 
 logging:
   level:
-    com.zhongshijie1995.big_boot: INFO # 指定本项目内代码的日志级别
+    root: info  # 指定根日志级别
+    com.zhongshijie1995.big_boot: info  # 指定本项目内代码的日志级别
+  file:
+    name: logs/big_boot.log
