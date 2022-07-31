@@ -1,6 +1,8 @@
 spring:
+  application:
+    name: big_boot  # 指定应用名
   profiles:
-    active: test
+    active: dev  # 指定激活文件
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher  # 解决Springboot与Swagger路径匹配策略冲突
@@ -16,4 +18,4 @@ logging:
     root: info  # 指定根日志级别
     com.zhongshijie1995.big_boot: info  # 指定本项目内代码的日志级别
   file:
-    name: logs/big_boot.log
+    name: logs/big_boot.log  # 指定日志文件
