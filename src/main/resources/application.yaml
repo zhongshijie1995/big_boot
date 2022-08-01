@@ -14,8 +14,6 @@ mybatis-plus:
     call-setters-on-nulls: true  # 指定resultType的类型为java.util.map发现字段为null时其Key仍保留
 
 logging:
-  level:
-    root: info  # 指定根日志级别
-    com.zhongshijie1995.big_boot: info  # 指定本项目内代码的日志级别
+  config: classpath:logback-spring.xml
   file:
-    name: logs/big_boot.log  # 指定日志文件
+    path: logs
