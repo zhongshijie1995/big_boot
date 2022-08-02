@@ -4,8 +4,7 @@
     <springProperty scope="context" name="app.name" source="spring.application.name" defaultValue="spring"/>
     <springProperty scope="context" name="log.path" source="logging.file.path" defaultValue="logs"/>
     <!-- 直接赋值的配置项 -->
-    <property name="ALL_LOG_PATH" value="${log.path}/all/%d{yyyy-MM-dd}"/>
-    <property name="AUDI_LOG_PATH" value="${log.path}/audi/%d{yyyy-MM-dd}"/>
+    <property name="LOG_PATH" value="${log.path}/${app.name}"/>
     <property name="maxFileSize" value="10MB"/>
     <property name="totalSizeCap" value="10GB"/>
     <property name="maxHistory" value="100"/>
@@ -18,14 +17,14 @@
     <!-- 完整日志文件打印器 -->
     <appender name="ALL" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <FileNamePattern>${ALL_LOG_PATH}/runtime.log</FileNamePattern>
+            <FileNamePattern>${LOG_PATH}/%d{yyyy-MM-dd}-all.log</FileNamePattern>
         </rollingPolicy>
         <encoder>
             <pattern>${FILE_LOG_PATTERN}</pattern>
             <charset>${FILE_LOG_CHARSET}</charset>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <fileNamePattern>${ALL_LOG_PATH}/%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+            <fileNamePattern>${LOG_PATH}/%d{yyyy-MM-dd}-all-%i.log</fileNamePattern>
             <maxFileSize>${maxFileSize}</maxFileSize>
             <totalSizeCap>${totalSizeCap}</totalSizeCap>
             <maxHistory>${maxHistory}</maxHistory>
@@ -35,15 +34,15 @@
     <appender name="AUDI" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--配置生成日志的文件路径-->
-            <FileNamePattern>${AUDI_LOG_PATH}/runtime.log</FileNamePattern>
+            <FileNamePattern>${LOG_PATH}/%d{yyyy-MM-dd}-audit.log</FileNamePattern>
         </rollingPolicy>
         <encoder>
             <pattern>${FILE_LOG_PATTERN}</pattern>
             <charset>${FILE_LOG_CHARSET}</charset>
         </encoder>
-        <filter class="com.zhongshijie1995.big_boot.util.log.AudiLogFilter"/>
+        <filter class="com.zhongshijie1995.big_boot.util.log.AuditLog"/>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <fileNamePattern>${AUDI_LOG_PATH}/%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+            <fileNamePattern>${LOG_PATH}/%d{yyyy-MM-dd}-audit-%i.log</fileNamePattern>
             <maxFileSize>${maxFileSize}</maxFileSize>
             <totalSizeCap>${totalSizeCap}</totalSizeCap>
             <maxHistory>${maxHistory}</maxHistory>
