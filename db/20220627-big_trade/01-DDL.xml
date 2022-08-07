@@ -11,6 +11,7 @@
             <column name="ops_time" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP"/>
             <column name="ops_type" type="varchar2(50)"/>
             <column name="ops_tip" type="varchar2(200)"/>
+            <column name="status" type="int" defaultValue='0'/>
         </createTable>
     </changeSet>
 
