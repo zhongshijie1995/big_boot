@@ -8,7 +8,7 @@
     <changeSet id="量化交易-操作提示表-创建" author="钟世杰" labels="1.0.0" context="all">
         <comment>操作提示表</comment>
         <createTable tableName="ops_tips">
-            <column name="ops_id" type="int" autoIncrement="true">
+            <column name="ids" type="int" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="ops_time" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP"/>
