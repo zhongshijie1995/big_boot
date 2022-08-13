@@ -31,7 +31,7 @@
         </rollingPolicy>
     </appender>
     <!-- 审计日志文件打印器 -->
-    <appender name="AUDI" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <appender name="AUDIT" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--配置生成日志的文件路径-->
             <FileNamePattern>${LOG_PATH}/%d{yyyy-MM-dd}-audit.log</FileNamePattern>
@@ -48,17 +48,42 @@
             <maxHistory>${maxHistory}</maxHistory>
         </rollingPolicy>
     </appender>
+    <!-- 性能日志文件打印器 -->
+    <appender name="CostReport" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${LOG_PATH}/%d{yyyy-MM-dd}-cost.log</FileNamePattern>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+            <charset>${FILE_LOG_CHARSET}</charset>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/%d{yyyy-MM-dd}-cost-%i.log</fileNamePattern>
+            <maxFileSize>${maxFileSize}</maxFileSize>
+            <totalSizeCap>${totalSizeCap}</totalSizeCap>
+            <maxHistory>${maxHistory}</maxHistory>
+        </rollingPolicy>
+    </appender>
     <!-- ********************* 打印器 ********************* -->
 
     <!-- ********************* 筛选器 ********************* -->
-    <!-- 附加：筛选DEBUG -->
-    <logger name="com.zhongshijie1995" level="DEBUG"/>
-
-    <!-- 根：筛选INFO写入到控制台和普通文件 -->
-    <root level="INFO">
-        <appender-ref ref="CONSOLE"/>
+    <!-- 附加：本应用包下的日志 -->
+    <logger name="com.zhongshijie1995" level="DEBUG" additivity="FALSE">
         <appender-ref ref="ALL"/>
-        <appender-ref ref="AUDI"/>
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="AUDIT"/>
+    </logger>
+
+    <!-- 附加：性能日志切面打印的日志 -->
+    <logger name="CostReport" level="INFO" additivity="FALSE">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="CostReport"/>
+    </logger>
+
+    <!-- 默认日志级别 -->
+    <root level="INFO" additivity="FALSE">
+        <appender-ref ref="ALL"/>
+        <appender-ref ref="CONSOLE"/>
     </root>
     <!-- ********************* 筛选器 ********************* -->
 
