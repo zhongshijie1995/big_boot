@@ -2,7 +2,7 @@ package com.zhongshijie1995.big_boot.sql;
 
 import com.zhongshijie1995.big_boot.sql.bean.RowMap;
 import com.zhongshijie1995.big_boot.sql.mapper.SQLMapper;
-import com.zhongshijie1995.big_boot.util.cost.CostTime;
+import com.zhongshijie1995.big_boot.util.cost.CostReport;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +23,7 @@ public class SQLController {
 
     @ApiOperation("插入数据表")
     @PostMapping("post")
-    @CostTime
+    @CostReport
     public HashMap<String, Object> post(String tableName, @RequestBody HashMap<String, Object> row) {
         Map<String, List<Object>> rowMap = RowMap.getKeysAndValues(row);
         SQLMapper.post(tableName, rowMap.get(RowMap.KEYS), rowMap.get(RowMap.VALUES));
@@ -32,7 +32,7 @@ public class SQLController {
 
     @ApiOperation("查询数据表")
     @GetMapping("get")
-    @CostTime
+    @CostReport
     public List<HashMap<String, Object>> get(String tableName) {
         return SQLMapper.get(tableName);
     }
