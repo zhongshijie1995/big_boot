@@ -31,6 +31,6 @@ Springboot大操场，集成一些基于Springboot的实验
 
 ### Restful服务
 
-#### 接口文档 `/swagger-ui`
+#### 接口文档 `/swagger-ui/index.html`
 
 ## GithubAction持续集成
