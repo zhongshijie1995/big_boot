@@ -27,21 +27,6 @@ public class StockController {
     @ApiOperation("计算利润")
     @PostMapping("calcProfit")
     public BigDecimal calcProfit(@RequestBody Trade trade) {
-//        // 准备数据
-//        Trade trade = new Trade();
-//        trade.setCode("601288");
-//        trade.setName("农业银行");
-//        trade.setScale(2);
-//        trade.setInPrice(BigDecimal.valueOf(6.92));
-//        trade.setOutPrice(BigDecimal.valueOf(7.40));
-//        trade.setQuantity(BigDecimal.valueOf(3700));
-//        trade.setCommissionRate(BigDecimal.valueOf(2.5 / 10000));
-//        trade.setTaxRate(BigDecimal.valueOf(0.1 / 100));
-//        trade.setTransferRate(BigDecimal.valueOf(0.001 / 100));
-//        trade.setBorrowType("融资");
-//        trade.setBorrowRate(BigDecimal.valueOf(6.99 / 100 / 365));
-//        trade.setBorrowStartDate("20221103");
-//        trade.setBorrowEndDate("20221103");
         // 计算交易结果
         BigDecimal amt = tradeCalc.calcTradeResult(trade);
         // 记录日志
