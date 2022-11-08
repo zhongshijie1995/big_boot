@@ -4,6 +4,7 @@ import com.zhongshijie1995.big_boot.stock.entity.Trade;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.SimpleDateFormat;
@@ -15,6 +16,10 @@ import java.util.List;
 @Component
 @Slf4j
 public class TradeCalc {
+
+    @Resource
+    protected StockRealTime stockRealTime;
+
     protected BigDecimal calcEntrustAmt(BigDecimal price, BigDecimal quantity, boolean isNegate) {
         // 初始化账目
         BigDecimal amt;
@@ -125,15 +130,21 @@ public class TradeCalc {
         scales.add(trade.getScale());
         roundingModes.add(RoundingMode.HALF_UP);
         // ------------------------ 买入 ------------------------
-        tmp = calcTradeAmt(trade.getInPrice(), trade.getQuantity(), feeRates, leastFees, scales, roundingModes, true);
+        BigDecimal inPrice = trade.getInPrice();
+        tmp = calcTradeAmt(inPrice, trade.getQuantity(), feeRates, leastFees, scales, roundingModes, true);
         log.info("买入发生额 [{}]", tmp);
         amt.add(tmp);
         // ------------------------------------------------------
         // ------------------------ 融资 ------------------------
         // 融资费
         if (trade.getBorrowType().equals("融资")) {
+            String borrowEndDate = trade.getBorrowEndDate();
+            if (borrowEndDate == null) {
+                borrowEndDate = new SimpleDateFormat("yyyyMMdd").format(new Date());
+                log.info("自动填补融资到期日[{}]", borrowEndDate);
+            }
             tmp = calcFeeByRate(tmp, trade.getBorrowRate(), BigDecimal.ZERO, trade.getScale(), RoundingMode.HALF_UP).negate();
-            tmp = tmp.multiply(calcDatePass(trade.getBorrowStartDate(), trade.getBorrowEndDate()));
+            tmp = tmp.multiply(calcDatePass(trade.getBorrowStartDate(), borrowEndDate));
             tmp = calcAmtScale(tmp, trade.getScale(), RoundingMode.HALF_UP);
             log.info("融资发生额 [{}]", tmp);
             amt.add(tmp);
@@ -145,7 +156,11 @@ public class TradeCalc {
         scales.add(trade.getScale());
         roundingModes.add(RoundingMode.HALF_UP);
         // ------------------------ 卖出 ------------------------
-        tmp = calcTradeAmt(trade.getOutPrice(), trade.getQuantity(), feeRates, leastFees, scales, roundingModes, false);
+        BigDecimal outPrice = trade.getOutPrice();
+        if (outPrice == null) {
+            outPrice = stockRealTime.price(trade.getCode());
+        }
+        tmp = calcTradeAmt(outPrice, trade.getQuantity(), feeRates, leastFees, scales, roundingModes, false);
         log.info("卖出发生额 [{}]", tmp);
         amt.add(tmp);
         // ------------------------------------------------------
