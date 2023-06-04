@@ -1,4 +1,4 @@
-package com.zhongshijie1995.big_boot.stock.entity;
+package com.zhongshijie1995.big_boot.bak.entity;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

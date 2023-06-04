@@ -1,4 +1,4 @@
-package com.zhongshijie1995.big_boot.stock.util;
+package com.zhongshijie1995.big_boot.bak.util;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpMethod;
@@ -13,7 +13,11 @@ public class StockRealTime {
 
     protected String sampleHttpGet(String url) {
         RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.exchange(url, HttpMethod.GET, null, String.class).getBody().trim();
+        String body = restTemplate.exchange(url, HttpMethod.GET, null, String.class).getBody();
+        if (body == null) {
+            return "";
+        }
+        return body.trim();
     }
 
     protected String getMarket(String code) {

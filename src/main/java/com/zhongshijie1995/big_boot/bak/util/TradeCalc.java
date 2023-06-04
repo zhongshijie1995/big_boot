@@ -1,6 +1,6 @@
-package com.zhongshijie1995.big_boot.stock.util;
+package com.zhongshijie1995.big_boot.bak.util;
 
-import com.zhongshijie1995.big_boot.stock.entity.Trade;
+import com.zhongshijie1995.big_boot.bak.entity.Trade;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
