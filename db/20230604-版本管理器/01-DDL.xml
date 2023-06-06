@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="版本管理器" author="钟世杰" labels="0.0.0" context="all">
+        <comment>版本管理器</comment>
+        <createTable tableName="version_info">
+            <column name="ids" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="version" type="text"/>
+            <column name="desc" type="text"/>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

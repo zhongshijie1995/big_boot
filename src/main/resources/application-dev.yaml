@@ -1,5 +1,3 @@
 spring:
   datasource:
-    url: jdbc:mysql://192.168.0.101:3306/big_boot_test
-    username: big_boot_test
-    password: big_boot_test
+    url: jdbc:sqlite:///Users/zhongshijie/Desktop/01-Project/big_boot/dev.db

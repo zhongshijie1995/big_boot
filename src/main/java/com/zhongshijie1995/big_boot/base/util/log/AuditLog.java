@@ -1,4 +1,4 @@
-package com.zhongshijie1995.big_boot.util.log;
+package com.zhongshijie1995.big_boot.base.util.log;
 
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.filter.Filter;

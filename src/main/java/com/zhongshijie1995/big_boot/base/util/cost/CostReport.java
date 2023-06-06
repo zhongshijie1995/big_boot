@@ -1,4 +1,4 @@
-package com.zhongshijie1995.big_boot.util.cost;
+package com.zhongshijie1995.big_boot.base.util.cost;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

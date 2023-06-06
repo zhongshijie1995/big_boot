@@ -40,7 +40,7 @@
             <pattern>${FILE_LOG_PATTERN}</pattern>
             <charset>${FILE_LOG_CHARSET}</charset>
         </encoder>
-        <filter class="com.zhongshijie1995.big_boot.util.log.AuditLog"/>
+        <filter class="com.zhongshijie1995.big_boot.base.util.log.AuditLog"/>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <fileNamePattern>${LOG_PATH}/%d{yyyy-MM-dd}-audit-%i.log</fileNamePattern>
             <maxFileSize>${maxFileSize}</maxFileSize>

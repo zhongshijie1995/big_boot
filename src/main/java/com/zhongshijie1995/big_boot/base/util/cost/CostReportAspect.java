@@ -1,4 +1,4 @@
-package com.zhongshijie1995.big_boot.util.cost;
+package com.zhongshijie1995.big_boot.base.util.cost;
 
 import com.alibaba.fastjson2.JSON;
 import lombok.Data;

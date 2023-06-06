@@ -1,4 +1,4 @@
-package com.zhongshijie1995.big_boot.info;
+package com.zhongshijie1995.big_boot.base.info;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,4 +22,6 @@ public class InfoProperties {
     @Value("${time}")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date time;
+
+    private String des;
 }
