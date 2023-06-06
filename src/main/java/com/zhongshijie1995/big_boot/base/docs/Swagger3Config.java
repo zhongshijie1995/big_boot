@@ -1,6 +1,6 @@
 package com.zhongshijie1995.big_boot.base.docs;
 
-import com.zhongshijie1995.big_boot.base.info.InfoProperties;
+import com.zhongshijie1995.big_boot.info.entity.Info;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +16,7 @@ import javax.annotation.Resource;
 @Configuration
 public class Swagger3Config {
     @Resource
-    private InfoProperties infoProperties;
+    private Info infoProperties;
 
     @Bean
     public Docket createRestApi() {

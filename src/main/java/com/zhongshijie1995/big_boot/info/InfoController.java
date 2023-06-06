@@ -1,10 +1,11 @@
-package com.zhongshijie1995.big_boot.base.info;
+package com.zhongshijie1995.big_boot.info;
 
 import com.alibaba.fastjson2.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.zhongshijie1995.big_boot.base.info.mapper.VersionInfo;
-import com.zhongshijie1995.big_boot.base.info.mapper.VersionInfoMapper;
 import com.zhongshijie1995.big_boot.base.util.cost.CostReport;
+import com.zhongshijie1995.big_boot.info.entity.Info;
+import com.zhongshijie1995.big_boot.info.mapper.VersionInfo;
+import com.zhongshijie1995.big_boot.info.mapper.VersionInfoMapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +19,7 @@ import javax.annotation.Resource;
 @RequestMapping("info")
 public class InfoController {
     @Resource
-    private InfoProperties infoProperties;
+    private Info info;
 
     @Resource
     private VersionInfoMapper versionInfoMapper;
@@ -27,29 +28,29 @@ public class InfoController {
     @ApiOperation("版本号")
     @GetMapping("version")
     public String version() {
-        return infoProperties.getVersion();
+        return info.getVersion();
     }
 
     @CostReport
     @ApiOperation("构建时间")
     @GetMapping("time")
     public String time() {
-        return infoProperties.getTime().toString();
+        return info.getTime().toString();
     }
 
     @CostReport
     @ApiOperation("全部")
     @GetMapping("all")
     public String all() {
-        infoProperties.setDes(desc());
-        return JSON.toJSONString(infoProperties);
+        info.setDes(desc());
+        return JSON.toJSONString(info);
     }
 
     @CostReport
     @ApiOperation("版本描述")
     @GetMapping("desc")
     public String desc() {
-        String version = infoProperties.getVersion();
+        String version = info.getVersion();
         LambdaQueryWrapper<VersionInfo> versionInfoLambdaQueryWrapper = new LambdaQueryWrapper<>();
         versionInfoLambdaQueryWrapper.eq(VersionInfo::getVersion, version);
         return versionInfoMapper.selectOne(versionInfoLambdaQueryWrapper).getDesc();

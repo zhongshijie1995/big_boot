@@ -1,4 +1,4 @@
-package com.zhongshijie1995.big_boot.base.info;
+package com.zhongshijie1995.big_boot.info.entity;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,7 +15,7 @@ import java.util.Date;
 @Configuration
 @ConfigurationProperties(prefix = "version")
 @PropertySource(value = "classpath:info.yaml")
-public class InfoProperties {
+public class Info {
     @Value("${version}")
     private String version;
 
