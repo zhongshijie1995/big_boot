@@ -19,6 +19,6 @@ logging:
     path: logs
 
 stock:
-  cod:
+  market:
     sh: 600, 601, 603, 605, 688
     sz: 000, 001, 003, 300, 301, 002

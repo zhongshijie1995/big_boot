@@ -1,3 +1,6 @@
 spring:
   datasource:
     url: jdbc:sqlite:///Users/zhongshijie/Desktop/01-Project/big_boot/dev.db
+
+stock:
+  star: 000987, 600030

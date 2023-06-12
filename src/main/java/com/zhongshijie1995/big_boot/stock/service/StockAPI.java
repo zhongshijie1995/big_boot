@@ -1,22 +1,25 @@
 package com.zhongshijie1995.big_boot.stock.service;
 
 import com.zhongshijie1995.big_boot.base.util.api.ApiGet;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @Component
 public class StockAPI {
 
-    @Value("${stock.cod.sh}")
-    private List<String> STOCK_COD_SH;
+    @Value("${stock.market.sh}")
+    private List<String> STOCK_MARKET_SH;
 
-    @Value("${stock.cod.sz}")
-    private List<String> STOCK_COD_SZ;
+    @Value("${stock.market.sz}")
+    private List<String> STOCK_MARKET_SZ;
 
     @Resource
     private ApiGet apiGet;
@@ -25,12 +28,12 @@ public class StockAPI {
         if (cod.length() != 6) {
             throw new Exception("股票代码位数不正确");
         }
-        for (String codHead : STOCK_COD_SH) {
+        for (String codHead : STOCK_MARKET_SH) {
             if (cod.startsWith(codHead)) {
                 return "sh" + cod;
             }
         }
-        for (String codHead : STOCK_COD_SZ) {
+        for (String codHead : STOCK_MARKET_SZ) {
             if (cod.startsWith(codHead)) {
                 return "sz" + cod;
             }
@@ -38,12 +41,9 @@ public class StockAPI {
         throw new Exception("未获取到市场代码");
     }
 
-    public Map<String, String> realtime(String cod) throws Exception {
+    public Map<String, String> realtimeAPITranslate(String body) {
         // 准备结果集合
         Map<String, String> result = new LinkedHashMap<>();
-        // API请求
-        String url = String.format("http://qt.gtimg.cn/q=%s", fixCod(cod));
-        String body = apiGet.httpGet(url);
         // 分割和解析
         String[] parts = body.split("~");
         result.put("股票名称", parts[1]);
@@ -94,7 +94,34 @@ public class StockAPI {
         result.put("动态市盈率", parts[52]);
         result.put("静态市盈率", parts[53]);
         result.put("成交额(万)", parts[57]);
+        // 返回结果集合
+        return result;
+    }
 
+    public Map<String, String> realtime(String cod) throws Exception {
+        // API请求
+        String stock = fixCod(cod);
+        String url = String.format("http://qt.gtimg.cn/q=%s", stock);
+        String body = apiGet.httpGet(url);
+        // 翻译API结果
+        return realtimeAPITranslate(body);
+    }
+
+    public List<Map<String, String>> realtime(List<String> cods) throws Exception {
+        // 逐个补全代码
+        List<String> fixCods = new ArrayList<>();
+        for (String cod : cods) {
+            fixCods.add(fixCod(cod));
+        }
+        // API请求
+        String url = String.format("http://qt.gtimg.cn/q=%s", String.join(",", fixCods));
+        String body = apiGet.httpGet(url);
+        // 逐个翻译API结果
+        List<Map<String, String>> result = new ArrayList<>();
+        String[] stocks = body.split(";");
+        for (String stock : stocks) {
+            result.add(realtimeAPITranslate(stock));
+        }
         return result;
     }
 }
