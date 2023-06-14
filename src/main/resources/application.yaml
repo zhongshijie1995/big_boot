@@ -1,3 +1,6 @@
+server:
+  port: 18999
+
 spring:
   application:
     name: big_boot  # 指定应用名
