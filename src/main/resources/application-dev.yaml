@@ -4,4 +4,3 @@ spring:
 
 stock:
   star: 000987, 600030
-  task: StockLog
