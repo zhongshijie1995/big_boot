@@ -21,10 +21,10 @@ public class QtStockAPI {
     @Value("${stock.market.sz}")
     private List<String> STOCK_MARKET_SZ;
 
-    private final String REQ_URL = "http://qt.gtimg.cn/q=%s";
-
     @Resource
     private ApiGet apiGet;
+
+    private final String REQ_URL = "http://qt.gtimg.cn/q=%s";
 
     private String fixCod(String cod) throws Exception {
         if (cod.length() != 6) {
