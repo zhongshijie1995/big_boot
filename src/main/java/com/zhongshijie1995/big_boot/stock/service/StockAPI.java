@@ -86,7 +86,7 @@ public class StockAPI {
         result.put("振幅", parts[43]);
         result.put("流通市值(亿)", parts[44]);
         result.put("总市值(亿)", parts[45]);
-        result.put("lf市净率", parts[46]);
+        result.put("市净率", parts[46]);
         result.put("涨停价", parts[47]);
         result.put("跌停价", parts[48]);
         result.put("量比", parts[49]);
