@@ -1,7 +1,7 @@
 package com.zhongshijie1995.big_boot.stock;
 
 import com.zhongshijie1995.big_boot.base.util.cost.CostReport;
-import com.zhongshijie1995.big_boot.stock.api.StockAPI;
+import com.zhongshijie1995.big_boot.stock.api.QtStockAPI;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -19,13 +19,13 @@ import java.util.Map;
 public class StockController {
 
     @Resource
-    private StockAPI stockAPI;
+    private QtStockAPI qtStockAPI;
 
     @CostReport
     @ApiOperation("实时查询")
     @GetMapping("realtime")
     public Map<String, String> realtime(String cod) throws Exception {
-        return stockAPI.realtime(cod);
+        return qtStockAPI.realtime(cod);
     }
 
 }

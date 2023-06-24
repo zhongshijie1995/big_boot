@@ -13,7 +13,7 @@ import java.util.Map;
 
 @Slf4j
 @Component
-public class StockAPI {
+public class QtStockAPI {
 
     @Value("${stock.market.sh}")
     private List<String> STOCK_MARKET_SH;
