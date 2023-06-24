@@ -1,3 +1,4 @@
+# -------------------- 应用级 --------------------
 server:
   port: 27900
 
@@ -17,11 +18,16 @@ mybatis-plus:
     call-setters-on-nulls: true  # 指定resultType的类型为java.util.map发现字段为null时其Key仍保留
 
 logging:
-  config: classpath:logback-spring.xml
+  config: classpath:logback-spring.xml  # 指定日志陪着文件
   file:
-    path: logs
+    path: logs  # 指定日志基础目录
 
+docs:
+  title: big_boot-default  # 文档标题
+  description: Springboot大操场，集成一些基于Springboot的实验  # 文档描述
+
+# -------------------- stock --------------------
 stock:
   market:
-    sh: 600, 601, 603, 605, 688
-    sz: 000, 001, 003, 300, 301, 002
+    sh: 600, 601, 603, 605, 688  # 指定沪市股票代码前缀
+    sz: 000, 001, 003, 300, 301, 002  # 指定深市股票代码前缀

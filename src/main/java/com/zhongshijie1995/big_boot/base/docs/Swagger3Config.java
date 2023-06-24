@@ -2,6 +2,7 @@ package com.zhongshijie1995.big_boot.base.docs;
 
 import com.zhongshijie1995.big_boot.info.dao.InfoBuild;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -15,6 +16,13 @@ import javax.annotation.Resource;
 
 @Configuration
 public class Swagger3Config {
+
+    @Value("${docs.title}")
+    private String docsTitle;
+
+    @Value("${docs.description}")
+    private String description;
+
     @Resource
     private InfoBuild infoBuildProperties;
 
@@ -30,8 +38,8 @@ public class Swagger3Config {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("big_boot")
-                .description("Springboot大操场，集成一些基于Springboot的实验")
+                .title(docsTitle)
+                .description(description)
                 .version(infoBuildProperties.getVersion())
                 .build();
     }
