@@ -15,13 +15,11 @@ import java.util.Date;
 @Configuration
 @ConfigurationProperties(prefix = "version")
 @PropertySource(value = "classpath:info.yaml")
-public class InfoVersionDescReal {
+public class InfoBuild {
     @Value("${version}")
     private String version;
 
     @Value("${time}")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date time;
-
-    private String des;
 }

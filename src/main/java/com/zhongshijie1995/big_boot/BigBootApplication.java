@@ -9,7 +9,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @EnableScheduling
 @SpringBootApplication
-@MapperScan("com.zhongshijie1995.big_boot.**.mapper")
+@MapperScan("com.zhongshijie1995.big_boot.**.dao")
 public class BigBootApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {

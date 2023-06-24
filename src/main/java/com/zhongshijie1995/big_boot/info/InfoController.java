@@ -1,8 +1,10 @@
 package com.zhongshijie1995.big_boot.info;
 
-import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONObject;
+import com.zhongshijie1995.big_boot.base.protocol.RespConstants;
+import com.zhongshijie1995.big_boot.base.protocol.RespBody;
 import com.zhongshijie1995.big_boot.base.util.cost.CostReport;
-import com.zhongshijie1995.big_boot.info.entity.InfoVersionDescReal;
+import com.zhongshijie1995.big_boot.info.entity.InfoBuild;
 import com.zhongshijie1995.big_boot.info.service.VersionInfoQuery;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -17,39 +19,75 @@ import javax.annotation.Resource;
 @RequestMapping("info")
 public class InfoController {
     @Resource
-    private InfoVersionDescReal infoVersionDescReal;
+    private InfoBuild infoBuild;
 
     @Resource
     private VersionInfoQuery versionInfoQuery;
 
+    @Resource
+    private RespBody respBody;
+
+    private static final String TIME="time";
+    private static final String VERSION = "version";
+    private static final String DESC = "desc";
+    private static final String ALL = "all";
+
     @CostReport
     @ApiOperation("版本号")
-    @GetMapping("version")
-    public String version() {
-        return infoVersionDescReal.getVersion();
+    @GetMapping(VERSION)
+    public RespBody version() {
+        // 提取版本号
+        JSONObject data = new JSONObject();
+        data.put(VERSION, infoBuild.getVersion());
+        // 设置返回体
+        respBody.setStatus(RespConstants.RESP_SUCC);
+        respBody.setData(data);
+        return respBody;
     }
 
     @CostReport
     @ApiOperation("构建时间")
-    @GetMapping("time")
-    public String time() {
-        return infoVersionDescReal.getTime().toString();
-    }
-
-    @CostReport
-    @ApiOperation("全部")
-    @GetMapping("all")
-    public String all() {
-        infoVersionDescReal.setDes(desc());
-        return JSON.toJSONString(infoVersionDescReal);
+    @GetMapping(TIME)
+    public RespBody time() {
+        // 提取构建时间
+        JSONObject data = new JSONObject();
+        data.put(TIME, infoBuild.getTime().toString());
+        // 设置返回体
+        respBody.setStatus(RespConstants.RESP_SUCC);
+        respBody.setData(data);
+        return respBody;
     }
 
     @CostReport
     @ApiOperation("版本描述")
-    @GetMapping("desc")
-    public String desc() {
-        String version = infoVersionDescReal.getVersion();
-        return versionInfoQuery.queryDesc(version);
+    @GetMapping(DESC)
+    public RespBody desc(String version) {
+        // 提取版本描述
+        JSONObject data = new JSONObject();
+        // 如果没有给定版本号，则认为查询当前版本
+        if (version == null) {
+            version = infoBuild.getVersion();
+        }
+        data.put(DESC, versionInfoQuery.queryDesc(version));
+        // 设置返回体
+        respBody.setStatus(RespConstants.RESP_SUCC);
+        respBody.setData(data);
+        return respBody;
+    }
+
+    @CostReport
+    @ApiOperation("全部")
+    @GetMapping(ALL)
+    public RespBody all() {
+        // 提取全部
+        JSONObject data = new JSONObject();
+        data.put(VERSION, infoBuild.getVersion());
+        data.put(TIME, infoBuild.getTime().toString());
+        data.put(DESC, versionInfoQuery.queryDesc(data.getString(VERSION)));
+        // 设置返回体
+        respBody.setStatus(RespConstants.RESP_SUCC);
+        respBody.setData(data);
+        return respBody;
     }
 
 }
