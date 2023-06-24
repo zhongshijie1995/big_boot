@@ -43,15 +43,6 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- ********************* Tomcat适配 ********************* -->
-        <!-- 指定tomcat由容器提供 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-tomcat</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <!-- ********************* Tomcat适配 ********************* -->
-
         <!-- Springboot测试启动器 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
