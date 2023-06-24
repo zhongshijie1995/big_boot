@@ -15,7 +15,7 @@ import java.util.Date;
 @Configuration
 @ConfigurationProperties(prefix = "version")
 @PropertySource(value = "classpath:info.yaml")
-public class Info {
+public class InfoVersionDescReal {
     @Value("${version}")
     private String version;
 

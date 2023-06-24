@@ -1,6 +1,6 @@
 package com.zhongshijie1995.big_boot.base.docs;
 
-import com.zhongshijie1995.big_boot.info.entity.Info;
+import com.zhongshijie1995.big_boot.info.entity.InfoVersionDescReal;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +16,7 @@ import javax.annotation.Resource;
 @Configuration
 public class Swagger3Config {
     @Resource
-    private Info infoProperties;
+    private InfoVersionDescReal infoVersionDescRealProperties;
 
     @Bean
     public Docket createRestApi() {
@@ -32,7 +32,7 @@ public class Swagger3Config {
         return new ApiInfoBuilder()
                 .title("big_boot")
                 .description("Springboot大操场，集成一些基于Springboot的实验")
-                .version(infoProperties.getVersion())
+                .version(infoVersionDescRealProperties.getVersion())
                 .build();
     }
 }

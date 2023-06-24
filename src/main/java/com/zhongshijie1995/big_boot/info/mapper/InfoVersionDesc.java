@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
 @Data
-public class VersionInfo {
+public class InfoVersionDesc {
     @TableId
     private Integer ids;
     private String version;

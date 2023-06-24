@@ -6,7 +6,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Component
 public class ApiGet {
-    public String httpGet(String url) throws Exception {
+    public String httpGetBody(String url) throws Exception {
         RestTemplate restTemplate = new RestTemplate();
         String body = restTemplate.exchange(url, HttpMethod.GET, null, String.class).getBody();
         if (body == null) {

@@ -2,7 +2,7 @@ package com.zhongshijie1995.big_boot.info;
 
 import com.alibaba.fastjson2.JSON;
 import com.zhongshijie1995.big_boot.base.util.cost.CostReport;
-import com.zhongshijie1995.big_boot.info.entity.Info;
+import com.zhongshijie1995.big_boot.info.entity.InfoVersionDescReal;
 import com.zhongshijie1995.big_boot.info.service.VersionInfoQuery;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -17,7 +17,7 @@ import javax.annotation.Resource;
 @RequestMapping("info")
 public class InfoController {
     @Resource
-    private Info info;
+    private InfoVersionDescReal infoVersionDescReal;
 
     @Resource
     private VersionInfoQuery versionInfoQuery;
@@ -26,29 +26,29 @@ public class InfoController {
     @ApiOperation("版本号")
     @GetMapping("version")
     public String version() {
-        return info.getVersion();
+        return infoVersionDescReal.getVersion();
     }
 
     @CostReport
     @ApiOperation("构建时间")
     @GetMapping("time")
     public String time() {
-        return info.getTime().toString();
+        return infoVersionDescReal.getTime().toString();
     }
 
     @CostReport
     @ApiOperation("全部")
     @GetMapping("all")
     public String all() {
-        info.setDes(desc());
-        return JSON.toJSONString(info);
+        infoVersionDescReal.setDes(desc());
+        return JSON.toJSONString(infoVersionDescReal);
     }
 
     @CostReport
     @ApiOperation("版本描述")
     @GetMapping("desc")
     public String desc() {
-        String version = info.getVersion();
+        String version = infoVersionDescReal.getVersion();
         return versionInfoQuery.queryDesc(version);
     }
 

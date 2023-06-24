@@ -1,7 +1,7 @@
 package com.zhongshijie1995.big_boot.stock;
 
 import com.zhongshijie1995.big_boot.base.util.cost.CostReport;
-import com.zhongshijie1995.big_boot.stock.service.StockAPI;
+import com.zhongshijie1995.big_boot.stock.api.StockAPI;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;

@@ -1,4 +1,4 @@
-package com.zhongshijie1995.big_boot.stock.service;
+package com.zhongshijie1995.big_boot.stock.api;
 
 import com.zhongshijie1995.big_boot.base.util.api.ApiGet;
 import lombok.extern.slf4j.Slf4j;
@@ -21,10 +21,12 @@ public class StockAPI {
     @Value("${stock.market.sz}")
     private List<String> STOCK_MARKET_SZ;
 
+    private final String REQ_URL = "http://qt.gtimg.cn/q=%s";
+
     @Resource
     private ApiGet apiGet;
 
-    public String fixCod(String cod) throws Exception {
+    private String fixCod(String cod) throws Exception {
         if (cod.length() != 6) {
             throw new Exception("股票代码位数不正确");
         }
@@ -41,7 +43,7 @@ public class StockAPI {
         throw new Exception("未获取到市场代码");
     }
 
-    public Map<String, String> realtimeAPITranslate(String body) {
+    private Map<String, String> realtimeAPITranslate(String body) {
         // 准备结果集合
         Map<String, String> result = new LinkedHashMap<>();
         // 分割和解析
@@ -101,8 +103,8 @@ public class StockAPI {
     public Map<String, String> realtime(String cod) throws Exception {
         // API请求
         String stock = fixCod(cod);
-        String url = String.format("http://qt.gtimg.cn/q=%s", stock);
-        String body = apiGet.httpGet(url);
+        String url = String.format(REQ_URL, stock);
+        String body = apiGet.httpGetBody(url);
         // 翻译API结果
         return realtimeAPITranslate(body);
     }
@@ -114,8 +116,8 @@ public class StockAPI {
             fixCods.add(fixCod(cod));
         }
         // API请求
-        String url = String.format("http://qt.gtimg.cn/q=%s", String.join(",", fixCods));
-        String body = apiGet.httpGet(url);
+        String url = String.format(REQ_URL, String.join(",", fixCods));
+        String body = apiGet.httpGetBody(url);
         // 逐个翻译API结果
         List<Map<String, String>> result = new ArrayList<>();
         String[] stocks = body.split(";");

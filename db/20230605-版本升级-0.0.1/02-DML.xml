@@ -7,7 +7,7 @@
 
     <changeSet id="版本升级-0.0.1" author="钟世杰" labels="0.0.1" context="all">
         <comment>版本升级-0.0.1</comment>
-        <insert tableName="version_info">
+        <insert tableName="info_version_desc">
             <column name="version" value="0.0.1"/>
             <column name="desc" value="你好，世界"/>
         </insert>
