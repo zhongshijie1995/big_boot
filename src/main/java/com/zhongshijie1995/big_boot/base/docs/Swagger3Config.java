@@ -1,6 +1,6 @@
 package com.zhongshijie1995.big_boot.base.docs;
 
-import com.zhongshijie1995.big_boot.info.entity.InfoBuild;
+import com.zhongshijie1995.big_boot.info.dao.InfoBuild;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

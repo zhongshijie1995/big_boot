@@ -3,8 +3,8 @@ package com.zhongshijie1995.big_boot.info;
 import com.alibaba.fastjson2.JSONObject;
 import com.zhongshijie1995.big_boot.base.protocol.RespConstants;
 import com.zhongshijie1995.big_boot.base.protocol.RespBody;
-import com.zhongshijie1995.big_boot.base.util.cost.CostReport;
-import com.zhongshijie1995.big_boot.info.entity.InfoBuild;
+import com.zhongshijie1995.big_boot.base.util.cost.RespCost;
+import com.zhongshijie1995.big_boot.info.dao.InfoBuild;
 import com.zhongshijie1995.big_boot.info.service.VersionInfoQuery;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -32,7 +32,7 @@ public class InfoController {
     private static final String DESC = "desc";
     private static final String ALL = "all";
 
-    @CostReport
+    @RespCost
     @ApiOperation("版本号")
     @GetMapping(VERSION)
     public RespBody version() {
@@ -45,7 +45,7 @@ public class InfoController {
         return respBody;
     }
 
-    @CostReport
+    @RespCost
     @ApiOperation("构建时间")
     @GetMapping(TIME)
     public RespBody time() {
@@ -58,7 +58,7 @@ public class InfoController {
         return respBody;
     }
 
-    @CostReport
+    @RespCost
     @ApiOperation("版本描述")
     @GetMapping(DESC)
     public RespBody desc(String version) {
@@ -75,7 +75,7 @@ public class InfoController {
         return respBody;
     }
 
-    @CostReport
+    @RespCost
     @ApiOperation("全部")
     @GetMapping(ALL)
     public RespBody all() {

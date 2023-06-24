@@ -1,6 +1,6 @@
 package com.zhongshijie1995.big_boot.stock;
 
-import com.zhongshijie1995.big_boot.base.util.cost.CostReport;
+import com.zhongshijie1995.big_boot.base.util.cost.RespCost;
 import com.zhongshijie1995.big_boot.stock.api.QtStockAPI;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -21,7 +21,7 @@ public class StockController {
     @Resource
     private QtStockAPI qtStockAPI;
 
-    @CostReport
+    @RespCost
     @ApiOperation("实时查询")
     @GetMapping("realtime")
     public Map<String, String> realtime(String cod) throws Exception {

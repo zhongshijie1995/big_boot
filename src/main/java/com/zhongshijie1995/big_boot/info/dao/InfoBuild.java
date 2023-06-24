@@ -1,4 +1,4 @@
-package com.zhongshijie1995.big_boot.info.entity;
+package com.zhongshijie1995.big_boot.info.dao;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
