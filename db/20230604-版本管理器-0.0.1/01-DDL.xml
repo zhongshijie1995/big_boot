@@ -5,7 +5,7 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
-    <changeSet id="版本管理器" author="钟世杰" labels="0.0.0" context="all">
+    <changeSet id="版本管理器-0.0.1-DDL" author="钟世杰" labels="0.0.1" context="all">
         <comment>版本管理器</comment>
         <createTable tableName="info_version_desc">
             <column name="ids" type="int" autoIncrement="true">

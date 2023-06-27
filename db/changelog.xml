@@ -4,6 +4,7 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
-    <includeAll path="20230604-版本管理器"/>
+    <includeAll path="20230604-版本管理器-0.0.0"/>
     <includeAll path="20230605-版本升级-0.0.1"/>
+    <includeAll path="20230624-股票计算器-0.0.2"/>
 </databaseChangeLog>

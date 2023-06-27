@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="版本升级-0.0.1-DML" author="钟世杰" labels="0.0.1" context="all">
+        <comment>版本升级-0.0.1</comment>
+        <insert tableName="info_version_desc">
+            <column name="version" value="0.0.0"/>
+            <column name="desc" value="你好，世界"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="股票计算器-0.0.2-DDL" author="钟世杰" labels="0.0.2" context="all">
+        <comment>股票计算器-0.0.2-DDL</comment>
+        <!-- 创建账户表 -->
+        <createTable tableName="stock_calc_acct">
+            <column name="uuid" type="text">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="acct_name" type="text"/>
+            <column name="commission_rate" type="numeric"/>
+            <column name="tax_rate" type="numeric"/>
+            <column name="transfer_rate" type="numeric"/>
+            <column name="min_commission" type="numeric"/>
+        </createTable>
+        <!-- 创建资金表 -->
+        <createTable tableName="stock_calc_fund">
+            <column name="uuid" type="text">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="fund_name" type="text"/>
+            <column name="pay_rate" type="numeric"/>
+        </createTable>
+        <!-- 创建交易表 -->
+        <createTable tableName="stock_calc_trade">
+            <column name="uuid" type="text">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="acct_name" type="text"/>
+            <column name="fund_name" type="text"/>
+            <column name="use_delay" type="numeric"/>
+            <column name="stock_code" type="text"/>
+            <column name="stock_name" type="text"/>
+            <column name="stock_number" type="numeric"/>
+            <column name="buy_date" type="date"/>
+            <column name="buy_price" type="numeric"/>
+            <column name="sell_date" type="date"/>
+            <column name="sell_price" type="numeric"/>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

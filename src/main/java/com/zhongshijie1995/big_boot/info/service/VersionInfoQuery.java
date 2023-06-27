@@ -1,8 +1,8 @@
 package com.zhongshijie1995.big_boot.info.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.zhongshijie1995.big_boot.info.dao.InfoVersionDesc;
 import com.zhongshijie1995.big_boot.info.dao.InfoVersionDescMapper;
+import com.zhongshijie1995.big_boot.info.entity.InfoVersionDesc;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

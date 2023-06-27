@@ -1,7 +1,7 @@
 package com.zhongshijie1995.big_boot.base.util.cost;
 
 import com.alibaba.fastjson2.JSONObject;
-import com.zhongshijie1995.big_boot.base.protocol.RespBody;
+import com.zhongshijie1995.big_boot.base.util.protocol.RespBody;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;

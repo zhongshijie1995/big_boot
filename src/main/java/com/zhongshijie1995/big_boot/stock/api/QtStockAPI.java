@@ -1,8 +1,8 @@
 package com.zhongshijie1995.big_boot.stock.api;
 
 import com.zhongshijie1995.big_boot.base.util.api.ApiGet;
+import com.zhongshijie1995.big_boot.stock.bean.StockMarket;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -15,33 +15,13 @@ import java.util.Map;
 @Component
 public class QtStockAPI {
 
-    @Value("${stock.market.sh}")
-    private List<String> STOCK_MARKET_SH;
-
-    @Value("${stock.market.sz}")
-    private List<String> STOCK_MARKET_SZ;
-
     @Resource
     private ApiGet apiGet;
 
-    private final String REQ_URL = "http://qt.gtimg.cn/q=%s";
+    @Resource
+    private StockMarket stockMarket;
 
-    private String fixCod(String cod) throws Exception {
-        if (cod.length() != 6) {
-            throw new Exception("股票代码位数不正确");
-        }
-        for (String codHead : STOCK_MARKET_SH) {
-            if (cod.startsWith(codHead)) {
-                return "sh" + cod;
-            }
-        }
-        for (String codHead : STOCK_MARKET_SZ) {
-            if (cod.startsWith(codHead)) {
-                return "sz" + cod;
-            }
-        }
-        throw new Exception("未获取到市场代码");
-    }
+    private final String REQ_URL = "http://qt.gtimg.cn/q=%s";
 
     private Map<String, String> realtimeAPITranslate(String body) {
         // 准备结果集合
@@ -102,7 +82,7 @@ public class QtStockAPI {
 
     public Map<String, String> realtime(String cod) throws Exception {
         // API请求
-        String stock = fixCod(cod);
+        String stock = stockMarket.fixCod(cod);
         String url = String.format(REQ_URL, stock);
         String body = apiGet.httpGetBody(url);
         // 翻译API结果
@@ -113,12 +93,12 @@ public class QtStockAPI {
         // 逐个补全代码
         List<String> fixCods = new ArrayList<>();
         for (String cod : cods) {
-            fixCods.add(fixCod(cod));
+            fixCods.add(stockMarket.fixCod(cod));
         }
         // API请求
         String url = String.format(REQ_URL, String.join(",", fixCods));
         String body = apiGet.httpGetBody(url);
-        // 逐个翻译API结果
+        // 逐个提取API结果
         List<Map<String, String>> result = new ArrayList<>();
         String[] stocks = body.split(";");
         for (String stock : stocks) {

@@ -1,4 +1,4 @@
-package com.zhongshijie1995.big_boot.info.dao;
+package com.zhongshijie1995.big_boot.info.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;

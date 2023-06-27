@@ -1,4 +1,4 @@
-package com.zhongshijie1995.big_boot.base.protocol;
+package com.zhongshijie1995.big_boot.base.util.protocol;
 
 import com.alibaba.fastjson2.JSONObject;
 import lombok.Data;

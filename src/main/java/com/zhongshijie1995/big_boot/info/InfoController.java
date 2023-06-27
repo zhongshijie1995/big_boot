@@ -1,10 +1,10 @@
 package com.zhongshijie1995.big_boot.info;
 
 import com.alibaba.fastjson2.JSONObject;
-import com.zhongshijie1995.big_boot.base.protocol.RespConstants;
-import com.zhongshijie1995.big_boot.base.protocol.RespBody;
 import com.zhongshijie1995.big_boot.base.util.cost.RespCost;
-import com.zhongshijie1995.big_boot.info.dao.InfoBuild;
+import com.zhongshijie1995.big_boot.base.util.protocol.RespBody;
+import com.zhongshijie1995.big_boot.base.util.protocol.RespConstants;
+import com.zhongshijie1995.big_boot.info.entity.InfoBuild;
 import com.zhongshijie1995.big_boot.info.service.VersionInfoQuery;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

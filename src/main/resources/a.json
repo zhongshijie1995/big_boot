@@ -1,0 +1,26 @@
+{
+  "stockCalcAcct": {
+    "acctName": "平安-普通",
+    "commissionRate": 0.00012,
+    "taxRate": 0.001,
+    "transferRate": 0.00001,
+    "minCommission": 5
+  },
+  "stockCalcFund": {
+    "fundName": "借呗",
+    "payRate": 0.12775
+  },
+  "stockCalcTrade": {
+    "acctName": "平安-普通",
+    "fundName": "借呗",
+    "useDelay": 0,
+    "stockCode": "159841",
+    "stockName": "证券ETF",
+    "stockQuantity": 122900,
+    "buyDate": "2023-06-21",
+    "buyPrice": 0.813,
+    "sellDate": "2023-06-21",
+    "sellPrice": 0.814
+  }
+}
+

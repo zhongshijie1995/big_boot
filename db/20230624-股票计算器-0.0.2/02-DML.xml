@@ -5,11 +5,12 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
-    <changeSet id="版本升级-0.0.1" author="钟世杰" labels="0.0.1" context="all">
-        <comment>版本升级-0.0.1</comment>
+    <changeSet id="股票计算器-0.0.2-DML" author="钟世杰" labels="0.0.2" context="all">
+        <comment>股票计算器-0.0.2-DML</comment>
+        <!-- 插入版本信息 -->
         <insert tableName="info_version_desc">
-            <column name="version" value="0.0.1"/>
-            <column name="desc" value="你好，世界"/>
+            <column name="version" value="0.0.2"/>
+            <column name="desc" value="股票计算器"/>
         </insert>
     </changeSet>
 
