@@ -104,6 +104,7 @@ public class StockCalcService {
 
         // -------------------- 汇总 --------------------
         BigDecimal netValue = addToAmt(buySum, sellSum, fundFee);
+        log.info("阶段[汇总]-汇总金额[{}]", netValue);
 
         // -------------------- 组织 --------------------
         stockCalcResult.setStockCalcAcct(acct);

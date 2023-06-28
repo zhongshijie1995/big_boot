@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.math.BigDecimal;
+
 @SpringBootTest
 public class StockCalcServiceTest {
 
@@ -49,6 +51,8 @@ public class StockCalcServiceTest {
         StockCalcTrade stockCalcTrade = JSONObject.parseObject(json, StockCalcTrade.class);
 
         StockCalcResult stockCalcResult = stockCalcService.calc(stockCalcAcct, stockCalcFund, stockCalcTrade);
-        System.out.println(stockCalcResult.getNetValue());
+        if (stockCalcResult.getNetValue().equals(BigDecimal.valueOf(98.91))) {
+            throw new Exception("计算汇总金额不正确-001");
+        }
     }
 }
